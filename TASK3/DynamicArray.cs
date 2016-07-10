@@ -14,7 +14,7 @@ namespace TASK3
     /// <typeparam name="T"></typeparam>
     public class DynamicArray<T> : IEnumerable<T>
     {
-        private static int _arraySize = 8;
+        private static readonly int _arraySize = 8;
         private T[] _array;
 
         #region Constructors
@@ -52,13 +52,9 @@ namespace TASK3
         /// <param name="list">список значений</param>
         public DynamicArray(IEnumerable<T> list)
         {
-            int length = 0;
             int numberElement = 0;
-            using (IEnumerator<T> enumerator = list.GetEnumerator())
-            {
-                while (enumerator.MoveNext())
-                    length++;
-            }
+            int length = list.Count();
+
             _array = new T[length];
             foreach(var item in list)
             {
@@ -167,11 +163,11 @@ namespace TASK3
         private void RemoveAt(int index)
         {
 
-                T[] newMassiv = _array;
+                T[] newArray = _array;
                 int length = Length;
                 for (int i = index; i <= length - 1; i++)
                 {
-                    _array[i] = newMassiv[i + 1];
+                    _array[i] = newArray[i + 1];
                 }
                 _array[length - 1] = default(T);
                 Length--;
@@ -190,7 +186,7 @@ namespace TASK3
                 throw new ArgumentOutOfRangeException();
             try
             {
-                T[] newMassiv = _array;
+                T[] newArray= _array;
 
                 if (Capacity <= Length)
                     Array.Resize(ref _array, Capacity * 2);
@@ -198,7 +194,7 @@ namespace TASK3
                 _array[index] = value;
                 for (int i = index; i <= length-1; i++)
                 {
-                    _array[i+1] = newMassiv[i];
+                    _array[i + 1] = newArray[i];
                 }
                 Length++;
             }

@@ -54,7 +54,7 @@ namespace TASK3
             //Console.WriteLine("Добавление элемента по индексу которого не существует");
             //if (!test.Insert(1000, 20))
             //    Console.WriteLine("Ошибка добавления в коллекцию");
-
+            test.AddRange(new DynamicArray<int> { 100, 200, 300});
 
             Console.ReadKey();
 
