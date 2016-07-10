@@ -113,12 +113,7 @@ namespace TASK3
         /// <param name="list">список элементов</param>
         public void AddRange(IEnumerable<T> list)
         {
-            int length = 0;
-            using (IEnumerator<T> enumerator = list.GetEnumerator())
-            {
-                while (enumerator.MoveNext())
-                    length++;
-            }
+            int length = list.Count();
             int freeItems = Capacity-Length;
             if (freeItems < length)
             {
