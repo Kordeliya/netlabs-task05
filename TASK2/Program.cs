@@ -23,7 +23,7 @@ namespace TASK2
             Console.WriteLine("Чтобы использовать файл по умолчанию нажмите Enter");
             string file = Console.ReadLine();
             if (file == String.Empty)
-                file = "text.txt";
+                file = ".\\File\\text.txt";
             string text = default(string);
             while (!File.Exists(file))
             {
