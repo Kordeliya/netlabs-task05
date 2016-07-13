@@ -226,10 +226,7 @@ namespace TASK3
 
         public IEnumerator<T> GetEnumerator()
         {
-            Enumarations enumerator = new Enumarations(_array, Length);
-            enumerator.Reset();
-            while (enumerator.MoveNext())
-                yield return (T)enumerator.Current;
+            return new Enumarations(_array, Length);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -243,6 +240,7 @@ namespace TASK3
             private int _curIndex;
             private T _current;
             private T[] _array;
+            bool disposed = false;
 
 
             public Enumarations(T[] array, int length)
@@ -291,7 +289,21 @@ namespace TASK3
 
             public void Dispose()
             {
-                throw new NotImplementedException();
+                Dispose(true);
+                GC.SuppressFinalize(this);  
+            }
+
+            // Protected implementation of Dispose pattern.
+            protected virtual void Dispose(bool disposing)
+            {
+                if (disposed)
+                    return;
+
+                if (disposing)
+                {
+                    _array = null;
+                }
+                disposed = true;
             }
         }
     }
